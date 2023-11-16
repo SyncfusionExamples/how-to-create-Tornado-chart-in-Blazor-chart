@@ -1,0 +1,60 @@
+﻿@page "/"
+@using Syncfusion.Blazor.Charts
+
+<SfChart>
+
+    <ChartPrimaryXAxis Minimum="4.4" Interval="0.2"></ChartPrimaryXAxis>
+
+    <ChartEvents OnAxisLabelRender="AxisLabelRenderEvent"></ChartEvents>
+
+    <ChartSeriesCollection>
+        <ChartSeries ColumnWidth="0.5" DataSource="@ChartPoints" XName="Height" YName="Female" Name="Female" Type="ChartSeriesType.StackingBar">
+            <ChartMarker>
+                <ChartDataLabel Visible="true" Position="LabelPosition.Top" Name="Female_Text">
+                    <ChartDataLabelFont FontWeight="600"></ChartDataLabelFont>
+                </ChartDataLabel>
+            </ChartMarker>
+        </ChartSeries>
+
+        <ChartSeries ColumnWidth="0.5" DataSource="@ChartPoints" XName="Height" YName="Male" Name="Male" Type="ChartSeriesType.StackingBar">
+            <ChartMarker>
+                <ChartDataLabel Visible="true" Name="Text" Position="LabelPosition.Top">
+                    <ChartDataLabelFont FontWeight="600"></ChartDataLabelFont>
+                </ChartDataLabel>
+            </ChartMarker>
+        </ChartSeries>
+    </ChartSeriesCollection>
+
+</SfChart>
+
+
+@code {
+
+    public class StackedBarChartData
+    {
+        public string Height { get; set; }
+        public double Female { get; set; }
+        public double Male { get; set; }
+        public string Text { get; set; }
+        public string Female_Text { get; set; }
+    }
+
+    public string Width { get; set; } = "90%";
+
+    public List<StackedBarChartData> ChartPoints { get; set; } = new List<StackedBarChartData>
+    {
+        new StackedBarChartData { Height = "4.5", Female = 31, Male = -31, Text = "31 KG", Female_Text = "31 KG" },
+        new StackedBarChartData { Height = "4.8", Female = 37, Male = -39, Text = "39 KG", Female_Text = "37 KG" },
+        new StackedBarChartData { Height = "5.1", Female = 49, Male = -52, Text = "52 KG", Female_Text = "49 KG" },
+        new StackedBarChartData { Height = "5.4", Female = 57, Male = -64, Text = "64 KG", Female_Text = "57 KG" },
+        new StackedBarChartData { Height = "5.7", Female = 63, Male = -70, Text = "70 KG", Female_Text = "63 KG" },
+        new StackedBarChartData { Height = "6", Female = 69, Male = -74, Text = "74 KG", Female_Text = "69 KG" }
+    };
+
+    private void AxisLabelRenderEvent(AxisLabelRenderEventArgs args)
+    {
+        args.Text = args.Text.Contains("-") ? (args.Text.Replace("-", "")) : args.Text;
+    }
+
+}
+
