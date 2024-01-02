@@ -1,8 +1,8 @@
 # how-to-create-Tornado-chart-in-Blazor-chart
 
-This article explains how to create tornado chart in blazor chart component.
+This article explains how to create tornado chart in Blazor Chart Component.
 
-**Creating Tornado chart using Stacked Bar**
+**Creating Tornado chart using Stacked Bar in Blazor chart**
 
 The [Blazor Chart](https://www.syncfusion.com/blazor-components/blazor-charts) provides the support to display data points as Tornado chart by using [Stacked Bar](https://www.syncfusion.com/blazor-components/blazor-charts/chart-types/stacked-bar-chart) chart by providing Positive and negative values for Y to render as Tornado Chart.
 
@@ -18,7 +18,7 @@ The following properties are available in the [AxisLabelRenderEventArgs](https:/
 
 The below code example illustrates this.
 
-**C#**
+**Index.razor**
 
 ```cshtml
 
@@ -84,7 +84,7 @@ The below code example illustrates this.
 ```
 
 
-The following screenshot illustrate the output of the above code snippet.
+The following screenshot illustrates the output of the above code snippet.
 
 **Output:**
  
@@ -100,7 +100,3 @@ You can refer to our [Blazor Chart feature tour](https://www.syncfusion.com/blaz
 For current customers, you can check out our components from the [License and Downloads](https://www.syncfusion.com/sales/teamlicense) page. If you are new to Syncfusion, you can try our 30-day [free trial](https://www.syncfusion.com/downloads/blazor) to check out our other controls.
 
 If you have any queries or require clarifications, please let us know in the comments section below. You can also contact us through our [support forums](https://www.syncfusion.com/forums), [support portal](https://support.syncfusion.com/create), or [feedback portal](https://www.syncfusion.com/feedback/blazor-components?control=charts). We are always happy to assist you!
-
-
-
-
