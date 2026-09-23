@@ -1,102 +1,82 @@
-# how-to-create-Tornado-chart-in-Blazor-chart
+# Create a Tornado Chart in Blazor Charts
 
-This article explains how to create tornado chart in Blazor Chart Component.
+## Overview
 
-**Creating Tornado chart using Stacked Bar in Blazor chart**
+This sample demonstrates how to create a tornado chart using Syncfusion [Blazor Charts](https://www.syncfusion.com/blazor-components/blazor-charts). The implementation renders mirrored horizontal bars by combining positive and negative values in stacked bar series, allowing easy comparison between two related data groups.
 
-The [Blazor Chart](https://www.syncfusion.com/blazor-components/blazor-charts) provides the support to display data points as Tornado chart by using [Stacked Bar](https://www.syncfusion.com/blazor-components/blazor-charts/chart-types/stacked-bar-chart) chart by providing Positive and negative values for Y to render as Tornado Chart.
+The sample uses separate series for male and female values and customizes axis label rendering so that negative values are displayed as positive labels. Data labels are enabled for both series to provide clear value representation directly within the chart.
 
-The Negative stack axis label can be made positive by using [OnAxisLabelRender](https://help.syncfusion.com/cr/blazor/Syncfusion.Blazor.Charts.ChartEvents.html#Syncfusion_Blazor_Charts_ChartEvents_OnAxisLabelRender) event. This event triggers before the axis label render.
+## Key Features
 
-The following properties are available in the [AxisLabelRenderEventArgs](https://help.syncfusion.com/cr/blazor/Syncfusion.Blazor.Charts.AxisLabelRenderEventArgs.html).
+- Uses the `SfChart` component to render the chart.
+- Creates a tornado chart using `ChartSeriesType.StackingBar`.
+- Binds chart data through the `DataSource` property.
+- Maps category values using `XName="Height"`.
+- Maps numerical values using `YName`.
+- Uses positive values for the Female series and negative values for the Male series to create the mirrored tornado effect.
+- Displays series data labels using:
+  - `ChartMarker`
+  - `ChartDataLabel`
+  - `ChartDataLabelFont`
+- Handles axis label customization with:
+  - `ChartEvents`
+  - `OnAxisLabelRender`
+  - `AxisLabelRenderEventArgs`
+- Removes the negative sign from displayed axis labels by modifying `AxisLabelRenderEventArgs.Text`.
+- Uses a strongly typed `StackedBarChartData` class for chart data binding.
+- Configures chart axis range through `ChartPrimaryXAxis`.
+- Displays custom label text using the `Name` property of `ChartDataLabel`.
 
-•	[LabelStyle](https://help.syncfusion.com/cr/blazor/Syncfusion.Blazor.Charts.AxisLabelRenderEventArgs.html#Syncfusion_Blazor_Charts_AxisLabelRenderEventArgs_LabelStyle) – Specifies the font information of the axis label.
+## Prerequisites
 
-•	[Text](https://help.syncfusion.com/cr/blazor/Syncfusion.Blazor.Charts.AxisLabelRenderEventArgs.html#Syncfusion_Blazor_Charts_AxisLabelRenderEventArgs_Text) – Specifies the text to be displayed in the axis label.
+- [Visual Studio 2022](https://visualstudio.microsoft.com/vs/) or [Visual Studio Code](https://code.visualstudio.com/)
+- [.NET SDK](https://dotnet.microsoft.com/en-us/download/dotnet) compatible with the project's target framework
 
-•	[Value](https://help.syncfusion.com/cr/blazor/Syncfusion.Blazor.Charts.AxisLabelRenderEventArgs.html#Syncfusion_Blazor_Charts_AxisLabelRenderEventArgs_Value) – Specifies the value of the axis label.
+## How to Run the Project
 
-The below code example illustrates this.
+**Visual Studio 2022**
 
-**Index.razor**
+1. Clone or download this repository.
+2. Open the project file inside the `Tornado Chart` folder.
+3. Restore NuGet packages.
+4. Build the project.
+5. Run the application using `Ctrl+F5`.
 
-```cshtml
+**Visual Studio Code**
 
-@using Syncfusion.Blazor.Charts
+1. Clone or download this repository.
+2. Open the repository folder in Visual Studio Code.
+3. Open the integrated terminal.
+4. Navigate to the project folder:
 
-<SfChart>
-
-    <ChartPrimaryXAxis Minimum="4.4" Interval="0.2"></ChartPrimaryXAxis>
-
-    <ChartEvents OnAxisLabelRender="AxisLabelRenderEvent"></ChartEvents>
-
-    <ChartSeriesCollection>
-        <ChartSeries ColumnWidth="0.5" DataSource="@ChartPoints" XName="Height" YName="Female" Name="Female" Type="ChartSeriesType.StackingBar">
-            <ChartMarker>
-                <ChartDataLabel Visible="true" Position="LabelPosition.Top" Name="Female_Text">
-                    <ChartDataLabelFont FontWeight="600"></ChartDataLabelFont>
-                </ChartDataLabel>
-            </ChartMarker>
-        </ChartSeries>
-        
-        <ChartSeries ColumnWidth="0.5" DataSource="@ChartPoints" XName="Height" YName="Male" Name="Male" Type="ChartSeriesType.StackingBar">
-            <ChartMarker>
-                <ChartDataLabel Visible="true" Name="Text" Position="LabelPosition.Top">
-                    <ChartDataLabelFont FontWeight="600"></ChartDataLabelFont>
-                </ChartDataLabel>
-            </ChartMarker>
-        </ChartSeries>
-    </ChartSeriesCollection>
-
-</SfChart>
-
-
-@code {
-
-    public class StackedBarChartData
-    {
-        public string Height { get; set; }
-        public double Female { get; set; }
-        public double Male { get; set; }
-        public string Text { get; set; }
-        public string Female_Text { get; set; }
-    }
-
-    public string Width { get; set; } = "90%";
-
-    public List<StackedBarChartData> ChartPoints { get; set; } = new List<StackedBarChartData>
-    {
-        new StackedBarChartData { Height = "4.5", Female = 31, Male = -31, Text = "31 KG", Female_Text = "31 KG" },
-        new StackedBarChartData { Height = "4.8", Female = 37, Male = -39, Text = "39 KG", Female_Text = "37 KG" },
-        new StackedBarChartData { Height = "5.1", Female = 49, Male = -52, Text = "52 KG", Female_Text = "49 KG" },
-        new StackedBarChartData { Height = "5.4", Female = 57, Male = -64, Text = "64 KG", Female_Text = "57 KG" },
-        new StackedBarChartData { Height = "5.7", Female = 63, Male = -70, Text = "70 KG", Female_Text = "63 KG" },
-        new StackedBarChartData { Height = "6", Female = 69, Male = -74, Text = "74 KG", Female_Text = "69 KG" }
-    };   
-    
-    private void AxisLabelRenderEvent(AxisLabelRenderEventArgs args)
-    {
-        args.Text = args.Text.Contains("-") ? (args.Text.Replace("-", "")) : args.Text;
-    }
-
-}
-
+```bash
+cd "Tornado Chart"
 ```
 
+5. Restore required packages:
 
-The following screenshot illustrates the output of the above code snippet.
+```bash
+dotnet restore
+```
 
-**Output:**
- 
-![](/tornado-chart.png)
+6. Run the application:
 
+```bash
+dotnet run
+```
 
-**Conclusion**
+7. Open the local application URL displayed in the terminal after the project starts.
 
-I hope you enjoyed learning how to display Tornado chart using Blazor Chart Component.
+## Project Structure
 
-You can refer to our [Blazor Chart feature tour](https://www.syncfusion.com/blazor-components/blazor-charts) page to know about its other groundbreaking feature representations and [documentation](https://blazor.syncfusion.com/documentation/chart/getting-started), and how to quickly get started for configuration specifications. You can also explore our [Blazor Chart example](https://blazor.syncfusion.com/demos/chart/line?theme=bootstrap5) to understand how to create and manipulate data.
+- `Pages/Index.razor` - Contains the chart implementation, stacked bar series configuration, chart data model, sample data source, and axis label rendering logic.
 
-For current customers, you can check out our components from the [License and Downloads](https://www.syncfusion.com/sales/teamlicense) page. If you are new to Syncfusion, you can try our 30-day [free trial](https://www.syncfusion.com/downloads/blazor) to check out our other controls.
+## Support and Feedback
 
-If you have any queries or require clarifications, please let us know in the comments section below. You can also contact us through our [support forums](https://www.syncfusion.com/forums), [support portal](https://support.syncfusion.com/create), or [feedback portal](https://www.syncfusion.com/feedback/blazor-components?control=charts). We are always happy to assist you!
+- For general product questions, visit the [Syncfusion Community Forum](https://www.syncfusion.com/forums) or [Syncfusion Support](https://www.syncfusion.com/support).
+- To report an issue specific to this sample, open a GitHub issue in this repository.
+- Refer to the official Blazor Chart documentation: https://help.syncfusion.com/chart-sdk/blazor/charts/getting-started
+
+## License
+
+This is a Syncfusion sample project provided to demonstrate product usage. Review the [Syncfusion license terms](https://www.syncfusion.com/sales/pricing?category=ui-components) before using Syncfusion components in your own applications.
