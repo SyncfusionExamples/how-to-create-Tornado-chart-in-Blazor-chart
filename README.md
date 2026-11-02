@@ -18,7 +18,7 @@ The following properties are available in the [AxisLabelRenderEventArgs](https:/
 
 The below code example illustrates this.
 
-**Index.razor**
+**Home.razor**
 
 ```cshtml
 
